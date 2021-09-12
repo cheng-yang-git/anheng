@@ -1,0 +1,10 @@
+{
+    "punishEnum": "L2",
+    "tolerate": 0.0001,
+    "punish_ratio": 0.5,
+    "optimizeEnum": "sgd",
+    "batchSize": 1,
+    "learn_ratio": 0.0001,
+    "local_ep": 5,
+    "classificationEnum": "ovr"
+}
