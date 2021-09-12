@@ -2,6 +2,7 @@ import os
 import json
 import numpy as np
 
+
 def get_data(id=""):
     path_train = os.path.join("FLdata", "train", "mnist_train_" + str(id) + ".json")
     path_test = os.path.join("FLdata", "test", "mnist_test_" + str(id) + ".json")
@@ -21,7 +22,8 @@ def get_data(id=""):
     num_T, num_t = len(y_T), len(y_t)
     return np.array(X_T), np.array(y_T), np.array(X_t), np.array(y_t), num_T, num_t
 
-def softmax(X, W):  
+
+def softmax(X, W):
     x = X.dot(W)
     z = x - np.max(x, axis=-1, keepdims=True)
     numerator = np.exp(z)
@@ -29,16 +31,19 @@ def softmax(X, W):
     softmax = numerator / denominator
     return softmax
 
+
 def loss(X, y, W):
     P = softmax(X, W)
     n = range(X.shape[0])
     return -np.mean(np.log(P[n, y]))  
+
 
 def grad(X, y, W):
     pred = softmax(X, W)
     x_range = range(X.shape[0])  
     pred[x_range, y] -= 1 
     return X.T.dot(pred) / X.shape[0]   
+
 
 def simple_lr(X, y, W, eta, E, batch_size, t, tol=1e-5):
     W_old = W.copy()
@@ -64,9 +69,11 @@ def simple_lr(X, y, W, eta, E, batch_size, t, tol=1e-5):
     average_loss = loss_sum/len(loss_hist)
     return W, average_loss
 
+
 def pred(W, X):
     P = softmax(X, W)
     return np.argmax(P, axis=1)  
+
 
 def accuracy(y_pre, y):
     count = y_pre == y  
